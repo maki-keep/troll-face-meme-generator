@@ -1,0 +1,32 @@
+.Form {
+  padding-bottom: 24px;
+  max-width: fit-content;
+}
+input {
+  border-radius: 6px;
+  font-size: 16px;
+  margin: 12px;
+  padding: 12px;
+}
+input[type="text"] {
+  border: 1px solid #D0D0D0;
+}
+input[type="submit"] {
+  cursor: pointer;
+  width: 100%;
+}
+
+@supports (display: grid) {
+  .Form {
+    display: grid;
+    gap: 24px 18px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  input {
+    margin: 0;
+  }
+  input[type="submit"] {
+    grid-column: 1 / -1;
+  }
+}

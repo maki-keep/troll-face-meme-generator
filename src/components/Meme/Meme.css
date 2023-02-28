@@ -1,0 +1,24 @@
+.Meme {
+  max-height: 72vh;
+  max-width: 80vw;
+  position: relative;
+  text-align: center;
+}
+.Meme-image {
+  max-height: inherit;
+  width: auto;
+}
+.Meme-text {
+  font-family: "Impact", cursive;
+  font-size: 32px;
+  font-weight: 600;
+  left: 0;
+  position: absolute;
+  text-align: center;
+}
+.Meme-text-top {
+  top: 8px;
+}
+.Meme-text-bottom {
+  bottom: 8px;
+}
