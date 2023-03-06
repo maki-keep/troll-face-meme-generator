@@ -1,24 +1,43 @@
 .Meme {
+  line-height: 0;
   max-height: 72vh;
   max-width: 80vw;
   position: relative;
   text-align: center;
 }
 .Meme-image {
+  height: auto;
   max-height: inherit;
+  max-width: inherit;
   width: auto;
 }
 .Meme-text {
+  color: #FFF;
   font-family: "Impact", cursive;
   font-size: 32px;
   font-weight: 600;
-  left: 0;
+  left: 50%;
+  letter-spacing: 1px;
+  line-height: 1;
   position: absolute;
   text-align: center;
+  text-shadow:
+    2px 2px 0 #000,
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    0 2px 0 #000,
+    2px 0 0 #000,
+    0 -2px 0 #000,
+    -2px 0 0 #000,
+    2px 2px 5px #000;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  width: 80%;
 }
 .Meme-text-top {
-  top: 8px;
+  top: 12px;
 }
 .Meme-text-bottom {
-  bottom: 8px;
+  bottom: 12px;
 }

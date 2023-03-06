@@ -13,7 +13,7 @@ function Meme({
         className="Meme-image"
       />}
       {meme.textTop && <p className="Meme-text Meme-text-top">{meme.textTop}</p>}
-      {meme.textBottom && <p className="Meme-text Meme-text-top">{meme.textBottom}</p>}
+      {meme.textBottom && <p className="Meme-text Meme-text-bottom">{meme.textBottom}</p>}
     </div>
   );
 }

@@ -1,0 +1,15 @@
+{
+    "success": true,
+    "data": {
+        "memes": [
+            {
+                "id": "176908",
+                "name": "Shut Up And Take My Money Fry",
+                "url": "memeimg.jpg",
+                "width": 500,
+                "height": 281,
+                "box_count": 2
+            }
+        ]
+    }
+}

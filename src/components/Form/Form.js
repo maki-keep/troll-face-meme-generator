@@ -1,7 +1,9 @@
 import "./Form.css";
 
 function Form({
-  handleSubmit
+  handleSubmit,
+  handleInputChange,
+  meme
 }) {
   return (
     <form
@@ -11,15 +13,19 @@ function Form({
       <input
         type="text"
         id="input1"
-        name="input1"
+        name="textTop"
         placeholder="top text"
         autoFocus
+        value={meme.textTop}
+        onChange={handleInputChange}
       />
       <input
         type="text"
         id="input2"
-        name="input2"
+        name="textBottom"
         placeholder="bottom text"
+        value={meme.textBottom}
+        onChange={handleInputChange}
       />
       <input
         type="submit"
