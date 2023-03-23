@@ -1,8 +1,11 @@
+.App {
+  overflow: auto;
+}
 .App-header {
   align-items: center;
   display: flex;
   flex-direction: row;
-  height: 64px;
+  height: var(--header-height);
   justify-content: flex-start;
   padding-inline: 32px;
 }
@@ -18,11 +21,22 @@
 .App-header > h1 {
   font-size: 24px;
 }
-main {
+.App-main {
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   margin: 0 auto;
-  max-width: fit-content;
+  min-height: calc(100vh - var(--header-height));
   padding-top: 32px;
+  position: relative;
+}
+/* .App-main > *:not(:last-child) {
+  margin-bottom: 24px;
+} */
+img {
+  height: auto;
+  max-height: inherit;
+  max-width: inherit;
+  width: auto;
 }

@@ -1,14 +1,16 @@
 import "./Form.css";
 
 function Form({
-  handleSubmit,
+  meme,
   handleInputChange,
-  meme
+  fetchMemes
 }) {
+  const handleClick = () => {
+    fetchMemes();
+  };
   return (
-    <form
+    <div
       className="Form"
-      onSubmit={handleSubmit}
     >
       <input
         type="text"
@@ -27,12 +29,14 @@ function Form({
         value={meme.textBottom}
         onChange={handleInputChange}
       />
-      <input
-        type="submit"
-        value="Get random meme image &#128444;"
+      <button
+        id="get-memes"
         className="bold dark-mode dark-mode-button"
-      />
-    </form>
+        onClick={handleClick}
+      >
+        Get memes
+      </button>
+    </div>
   );
 }
 

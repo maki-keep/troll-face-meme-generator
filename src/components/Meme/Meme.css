@@ -1,15 +1,8 @@
 .Meme {
   line-height: 0;
-  max-height: 72vh;
-  max-width: 80vw;
+  max-height: 640px;
   position: relative;
   text-align: center;
-}
-.Meme-image {
-  height: auto;
-  max-height: inherit;
-  max-width: inherit;
-  width: auto;
 }
 .Meme-text {
   color: #FFF;

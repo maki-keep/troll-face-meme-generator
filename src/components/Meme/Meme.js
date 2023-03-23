@@ -5,15 +5,20 @@ function Meme({
 }) {
   return (
     <div className="Meme">
-      {meme.image && <img
+    {meme.image && (
+      <img
         src={meme.image.url}
         alt={meme.image.name}
         width={meme.image.width}
         height={meme.image.height}
-        className="Meme-image"
-      />}
-      {meme.textTop && <p className="Meme-text Meme-text-top">{meme.textTop}</p>}
-      {meme.textBottom && <p className="Meme-text Meme-text-bottom">{meme.textBottom}</p>}
+      />
+    )}
+    {meme.textTop && (
+      <p className="Meme-text Meme-text-top">{meme.textTop}</p>
+    )}
+    {meme.textBottom && (
+      <p className="Meme-text Meme-text-bottom">{meme.textBottom}</p>
+    )}
     </div>
   );
 }

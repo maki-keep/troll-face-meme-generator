@@ -4,35 +4,34 @@ import trollFace from "./media/troll-face.png";
 import "./App.css";
 import Form from "./components/Form/Form";
 import Meme from "./components/Meme/Meme";
+import MemesList from "./components/MemesList/MemesList";
 
 function App() {
+  // default value
+  const defaultMeme = defaultJson.data.memes[0];
+
   // useState
   const [memes, setMemes] = useState(defaultJson.data.memes);
-  const defaultMeme = defaultJson.data.memes[0];
   const [meme, setMeme] = useState({
-    image: {
-      ...defaultMeme,
-      url: require(`./media/${defaultMeme.url}`)
-    },
+    index: 0,
+    image: defaultMeme,
     textTop: "Shut up",
     textBottom: "and take my money"
   });
   const [hasFetched, setHasFetched] = useState(false);
 
-  const getRandomMeme = () => {
+  // meme functions
+  const selectRandomMeme = () => {
     const randomIndex = Math.floor(Math.random() * memes.length);
-    console.log(memes[randomIndex]);
-    return memes[randomIndex];
-  };
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const randomMeme = memes[randomIndex];
+    console.log(randomMeme);
     setMeme(prevMeme => ({
       ...prevMeme,
-      [name]: value
+      index: randomIndex,
+      image: randomMeme,
     }));
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const fetchMemes = () => {
     fetch("https://api.imgflip.com/get_memes") // API call
       .then(res => res.json())
       .then(json => {
@@ -40,15 +39,36 @@ function App() {
         setMemes(json.data.memes);
       });
   };
+  const selectMeme = (index) => {
+    const selectedMeme = memes[index];
+    try {
+      if (selectedMeme) {
+        setMeme(prevMeme => ({
+          ...prevMeme,
+          index,
+          image: selectedMeme,
+        }));
+      } else {
+        throw new Error("Meme index is outside of list, or NaN.");
+      }
+    } catch(e) {
+      console.log(e);
+    }
+  };
+
+  // event handlers
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setMeme(prevMeme => ({
+      ...prevMeme,
+      [name]: value
+    }));
+  };
 
   // useEffect
   useEffect(() => {
     if (hasFetched) {
-      const randomMeme = getRandomMeme();
-      setMeme(prevMeme => ({
-        ...prevMeme,
-        image: randomMeme,
-      }));
+      selectRandomMeme();
       setHasFetched(false);
     }
   }, [hasFetched]);
@@ -64,13 +84,22 @@ function App() {
         />
         <h1 className="bold">Meme Generator</h1>
       </header>
-      <main>
+      <main className="App-main">
         <Form
-          handleSubmit={handleSubmit}
-          handleInputChange={handleInputChange}
           meme={meme}
+          handleInputChange={handleInputChange}
+          fetchMemes={fetchMemes}
         />
-        {meme && <Meme meme={meme} />}
+      {meme && (
+        <Meme meme={meme} />
+      )}
+      {memes && (
+        <MemesList
+          memes={memes}
+          meme={meme}
+          selectMeme={selectMeme}
+        />
+      )}
       </main>
     </div>
   );

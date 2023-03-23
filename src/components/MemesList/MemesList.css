@@ -1,0 +1,23 @@
+.MemesList {
+  max-height: fit-content;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+.meme-list-item {
+  align-items: flex-end;
+  display: inline-flex;
+  height: 64px;
+  justify-content: center;
+  line-height: 0;
+  max-height: 64px;
+  max-width: 64px;
+  width: 64px;
+}
+.meme-list-item > img {
+  opacity: 1;
+}
+.meme-list-item.active > img {
+  opacity: .5;
+}
