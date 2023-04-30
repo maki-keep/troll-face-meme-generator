@@ -7,20 +7,32 @@ import Meme from "./components/Meme/Meme";
 import MemesList from "./components/MemesList/MemesList";
 
 function App() {
-  // default value
+  /* default value */
   const defaultMeme = defaultJson.data.memes[0];
 
-  // useState
+  /* useState */
   const [memes, setMemes] = useState(defaultJson.data.memes);
   const [meme, setMeme] = useState({
     index: 0,
-    image: defaultMeme,
-    textTop: "Shut up",
-    textBottom: "and take my money"
+    image: defaultMeme
   });
+  const [texts, setTexts] = useState([
+    {
+      value: "Shut up",
+      width: 500,
+      defaultX: 390,
+      defaultY: 10
+    },
+    {
+      value: "and take my money",
+      width: 500,
+      defaultX: 390,
+      defaultY: 240
+    }
+  ]);
   const [hasFetched, setHasFetched] = useState(false);
 
-  // meme functions
+  /* meme functions */
   const selectRandomMeme = () => {
     const randomIndex = Math.floor(Math.random() * memes.length);
     const randomMeme = memes[randomIndex];
@@ -56,16 +68,46 @@ function App() {
     }
   };
 
-  // event handlers
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setMeme(prevMeme => ({
-      ...prevMeme,
-      [name]: value
-    }));
+  /* text functions */
+  const addText = (value = "New text", width = 500, defaultX = 10, defaultY = 10) => {
+    setTexts(prevTexts => ([
+      ...prevTexts,
+      {
+        id: texts.length,
+        value,
+        width,
+        defaultX,
+        defaultY
+      }
+    ]));
+  };
+  const removeText = (index) => {
+    setTexts(prevTexts => ([
+      ...prevTexts.slice(0, index),
+      ...prevTexts.slice(index + 1)
+    ]));
+  };
+  const changeText = (index, value, key = "value") => {
+    /* value to be assigned in state */
+    let valueState = value;
+
+    /* width key needs numbers to work correctly */
+    if (key === "width") {
+      valueState = parseInt(value, 10);
+    }
+
+    setTexts(prevTexts => (
+      prevTexts.map((prevText, prevIndex) => (
+
+        /* at matching index, change value of given key in state
+         * else, leave text as is
+         */
+        prevIndex === index ? { ...prevText, [`${key}`]: valueState } : prevText
+      ))
+    ));
   };
 
-  // useEffect
+  /* useEffect */
   useEffect(() => {
     if (hasFetched) {
       selectRandomMeme();
@@ -73,7 +115,7 @@ function App() {
     }
   }, [hasFetched]);
 
-  // render
+  /* render */
   return (
     <div className="App">
       <header className="App-header dark-mode">
@@ -85,14 +127,14 @@ function App() {
         <h1 className="bold">Meme Generator</h1>
       </header>
       <main className="App-main">
-        <Form
-          meme={meme}
-          handleInputChange={handleInputChange}
-          fetchMemes={fetchMemes}
-        />
-      {meme && (
-        <Meme meme={meme} />
-      )}
+        <div id="meme-container">
+        {meme && (
+          <Meme
+            meme={meme}
+            texts={texts}
+          />
+        )}
+        </div>
       {memes && (
         <MemesList
           memes={memes}
@@ -100,6 +142,13 @@ function App() {
           selectMeme={selectMeme}
         />
       )}
+        <Form
+          texts={texts}
+          addText={addText}
+          removeText={removeText}
+          changeText={changeText}
+          fetchMemes={fetchMemes}
+        />
       </main>
     </div>
   );

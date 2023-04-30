@@ -1,10 +1,34 @@
+import { Fragment } from "react";
+import Draggable from 'react-draggable';
 import "./Meme.css";
 
 function Meme({
-  meme
+  meme,
+  texts
 }) {
+  const textsElements = texts.map((text, index) => (
+    <Fragment
+      key={index}
+    >
+      <Draggable
+        bounds="#Meme"
+        defaultPosition={{x: text.defaultX, y: text.defaultY}}
+        grid={[10, 10]}
+      >
+        <p
+          className="Meme-text"
+          style={{
+            width: text.width
+          }}
+        >
+          {text.value}
+          <span className="highlight"></span>
+        </p>
+      </Draggable>
+    </Fragment>
+  ));
   return (
-    <div className="Meme">
+    <div id="Meme">
     {meme.image && (
       <img
         src={meme.image.url}
@@ -13,12 +37,7 @@ function Meme({
         height={meme.image.height}
       />
     )}
-    {meme.textTop && (
-      <p className="Meme-text Meme-text-top">{meme.textTop}</p>
-    )}
-    {meme.textBottom && (
-      <p className="Meme-text Meme-text-bottom">{meme.textBottom}</p>
-    )}
+    {texts.length > 0 && textsElements}
     </div>
   );
 }

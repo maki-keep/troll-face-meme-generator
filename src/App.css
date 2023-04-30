@@ -31,6 +31,11 @@
   padding-top: 32px;
   position: relative;
 }
+#meme-container {
+  height: 100%;
+  overflow: scroll;
+  width: 100%;
+}
 /* .App-main > *:not(:last-child) {
   margin-bottom: 24px;
 } */

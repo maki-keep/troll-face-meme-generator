@@ -1,15 +1,20 @@
-.Meme {
+#Meme {
+  height: 640px;
   line-height: 0;
+  margin: 0 auto;
   max-height: 640px;
+  max-width: 1280px;
   position: relative;
   text-align: center;
+  width: 1280px;
 }
 .Meme-text {
   color: #FFF;
+  cursor: move;
   font-family: "Impact", cursive;
   font-size: 32px;
   font-weight: 600;
-  left: 50%;
+  left: 0;
   letter-spacing: 1px;
   line-height: 1;
   position: absolute;
@@ -25,12 +30,18 @@
     -2px 0 0 #000,
     2px 2px 5px #000;
   text-transform: uppercase;
-  transform: translateX(-50%);
-  width: 80%;
+  top: 0;
+  max-width: 80%;
 }
-.Meme-text-top {
-  top: 12px;
+.highlight {
+  border: 1px dashed transparent;
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
-.Meme-text-bottom {
-  bottom: 12px;
+.Meme-text:hover .highlight {
+  border-color: #000;
 }
